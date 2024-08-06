@@ -52,9 +52,7 @@ struct TextAppearanceViewModifier<Appearance: BaseTextAppearance>: ViewModifier
                 case "sans-serif":
                     return nil
                 default:
-                    if !UIFont.fontNames(forFamilyName: lowerCased).isEmpty {
-                        return family
-                    }
+                    return UIFont.validateFamily(family)
                 }
             }
         }
@@ -211,9 +209,7 @@ extension UIFont {
                 case "sans-serif":
                     return nil
                 default:
-                    if !UIFont.fontNames(forFamilyName: lowerCased).isEmpty {
-                        return family
-                    }
+                    return UIFont.validateFamily(family)
                 }
             }
         }

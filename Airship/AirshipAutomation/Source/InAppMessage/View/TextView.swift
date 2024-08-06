@@ -2,6 +2,10 @@
 
 import SwiftUI
 
+#if canImport(AirshipCore)
+import AirshipCore
+#endif
+
 struct TextView: View {
     let textInfo: InAppMessageTextInfo
     let textTheme: InAppMessageTheme.Text
@@ -83,9 +87,7 @@ fileprivate extension UIFont {
                 case "sans-serif":
                     return nil
                 default:
-                    if !UIFont.fontNames(forFamilyName: lowerCased).isEmpty {
-                        return family
-                    }
+                    return UIFont.validateFamily(family)
                 }
             }
         }

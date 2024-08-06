@@ -30,6 +30,35 @@ public extension View {
     }
 }
 
+public extension UIFont {
+    static func validateFamily(_ family:String) -> String? {
+        //判断返回的airship后台返回的字体苹果是否支持
+        var allfontNamesList = [String]()
+        
+        let fontFamilieList = UIFont.familyNames
+        for(i,_) in fontFamilieList.enumerated(){
+            let fontFamily = fontFamilieList[i]
+            let fontNames = UIFont.fontNames(forFamilyName: fontFamily)
+            
+            for (ii,_) in fontNames.enumerated(){
+                let fontName = fontNames[ii]
+                allfontNamesList.append(fontName)
+            }
+        }
+        
+        if allfontNamesList.contains(family){
+            return family
+        } else {
+            if !UIFont.fontNames(forFamilyName: family.lowercased()).isEmpty {
+                return family
+            }
+        }
+        
+        return nil
+    }
+}
+
+
 #if !os(watchOS)
 /// NOTE: For internal use only. :nodoc:
 public extension UIWindow {
